@@ -2,15 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link
-      rel="stylesheet"
-      href="output.css"
-    />
+    <link rel="stylesheet" href="output.css" />
   </head>
   <body>
     <div class="flex flex-col justify-center items-center h-screen w-full">
@@ -23,35 +17,30 @@
 
       <form class="bg-white shadow-lg w-[30%] rounded-lg p-4 h-[400px]">
         <div class="flex flex-col mb-4 gap-3">
-          <label
-            for="email"
-            class="font-medium"
-            >Email</label
-          >
+          <label for="email" class="font-medium">Email</label>
           <input
             type="email"
             placeholder="Email"
             required
             class="border border-gray-400 outline-none focus:ring-1 focus-ring-black px-3 py-2 rounded-md"
+            id="login_email"
           />
         </div>
         <div class="flex flex-col mb-4 gap-3">
-          <label
-            for="password"
-            class="font-medium"
-            >Password</label
-          >
+          <label for="password" class="font-medium">Password</label>
           <input
             type="password"
             placeholder="Password"
             required
             class="border border-gray-400 outline-none focus:ring-1 focus-ring-black px-3 py-2 rounded-md"
+            id="login_password"
           />
         </div>
 
         <button
           type="submit"
           class="bg-blue-700 w-full py-2 px-6 font-[18px] text-white rounded-lg mt-[4rem]"
+          id="login_button"
         >
           Login
         </button>
