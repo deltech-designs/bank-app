@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="output.css" />
+  </head>
+  <body class="bg-gray-100 min-h-screen p-6">
+    <div
+      class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-1 border-2 border-blue-500 w-full"
+    >
+      <nav class="flex flex-row justify-between items-center">
+        <div>
+          <h1 class="font-bold mb-6 text-center text-blue-700">
+            Welcome to Your Dashboard
+          </h1>
+        </div>
+
+        <div class="text-center">
+          <button
+            id="logout_button"
+            class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
+      </nav>
+
+      <div id="user-info" class="space-y-4 text-gray-700 text-lg">
+        <!-- User info will be inserted here -->
+      </div>
+
+      <div flex flex-col mt>
+        <div>
+          <input
+            type="number"
+            id="amount"
+            placeholder="Enter amount"
+            class="border border-gray-400 outline-none focus:ring-1 focus-ring-black px-3 py-2 rounded-md"
+          />
+        </div>
+        <div>
+          <select id="action" class="border border-gray-600">
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+          </select>
+          <button
+            id="submit"
+            class="bg-blue-700 py-2 px-6 font-[18px] text-white rounded-lg mt-6"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
