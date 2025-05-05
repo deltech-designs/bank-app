@@ -2,55 +2,104 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="output.css" />
 
     <title>Dashboard</title>
-    <link
-      rel="stylesheet"
-      href="output.css"
-    />
   </head>
-  <body class="bg-gray-100 min-h-screen p-6">
-    <div
-      class="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 mt-1 border-2 border-blue-500 w-full"
-    >
+
+  <body class="bg-blue-950 h-screen overflow-hidden">
+    
+    <div class="">
       <nav class="flex flex-row justify-between items-center">
         <div>
-          <h1 class="font-bold mb-6 text-center text-blue-700">
-            Welcome to Your Dashboard
+          <h1 class="font-bold mb-6 text-center text-white text-xl ml-5">
+            Dashboard
           </h1>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mr-5">
           <button
             id="logout_button"
-            class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg"
+            class="bg-red-500 hover:bg-red-600 translate-x-3t text-white py-2 px-6 rounded-lg"
           >
             Logout
           </button>
         </div>
       </nav>
-
-      <div
-        id="user-info"
-        class="space-y-4 text-gray-700 text-lg"
-      >
-        <!-- User info will be inserted here -->
+    </div>
+    
+    <div class="flex flex-row gap-4 ">
+      <div>
+        <div class="w-[500px] bg-gray-700 h-[21rem] rounded-2xl ml-5">
+          <h2 class="text-xl text-white mx-8 mt-4 font-bold">My Card</h2>
+          <div
+            id="user-info"
+            class="text-black text-lg bg-slate-100 h-64 rounded-lg items-center justify-center w-[400px] mx-10 mt-7"
+          ></div>
+        </div>
+    
+        <div
+          class="flex justify-around items-center mt-6 w-[500px] h-[12rem] bg-gray-700 ml-5 rounded-xl"
+        >
+          <div>
+            <button
+              class="px-4 py-2 bg-gray-400 text-white rounded items-center openModalButton"
+    
+            >
+              <i class="bx bx-up-arrow-alt"></i>
+            </button>
+            <p class="text-white">Deposit</p>
+          </div>
+          <div>
+            <button
+              class="px-4 py-2 bg-gray-400 text-white rounded openModalButton"
+            >
+              <i class="bx bx-down-arrow-alt"></i>
+            </button>
+            <p class="text-white">Withdraw</p>
+          </div>
+          <div>
+            <button
+              class="px-4 py-2 bg-gray-400 text-white rounded openModalButton"
+      
+            >
+              <i class="bx bx-wallet"></i>
+            </button>
+            <p class="text-white">Savings</p>
+          </div>
+        </div>
       </div>
 
-      <button
-        class="px-4 py-2 bg-blue-600 text-white rounded"
-        id="openModalButton"
+      <div
+        class="bg-slate-200 w-[700px] h-30 shadow-sm rounded-md"
+        id="transaction-history"
       >
-        <i class="bx bx-up-arrow-alt"></i>
-      </button>
+        <h4 class="text-xl ml-5">Transaction History</h4>
+        <div class="overflow-x-auto mt-4">
+          <table
+            class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
+          >
+            <thead class="bg-gray-200">
+              <tr>
+                <th class="px-4 py-2 text-left">Date</th>
+                <th class="px-4 py-2 text-left">Description</th>
+                <th class="px-4 py-2 text-left">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="transactionTableBody" class="text-center"></tbody>
+          </table>
+        </div>
+  
+      </div>
+
+    </div>
+
+    
 
       <!-- Modal -->
       <div
@@ -69,10 +118,7 @@
               &times;
             </button>
           </div>
-          <form
-            onsubmit="handleSubmit(event)"
-            class="space-y-4"
-          >
+          <form onsubmit="handleSubmit(event)" class="space-y-4">
             <!-- Bank Name -->
             <div>
               <label
@@ -137,6 +183,26 @@
               />
             </div>
 
+            <!--send modal-->
+            <div id="modal"
+               class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">SendFunds</h2>
+            <button
+              id="closeModalButton"
+              class="text-gray-500 hover:text-red-600 text-2xl"
+            >
+              &times;
+            </button>
+          </div>
+          <form onsubmit="handleSubmit(event)" class="space-y-4">
+            
+          
+
+
+
+
+            </div>
             <!--  -->
             <button
               type="submit"
