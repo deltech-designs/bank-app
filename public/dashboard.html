@@ -2,85 +2,88 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="output.css" />
-
+    <link
+      rel="stylesheet"
+      href="output.css"
+    />
     <title>Dashboard</title>
   </head>
 
-  <body class="bg-blue-950 h-screen overflow-hidden">
-    
-    <div class="">
-      <nav class="flex flex-row justify-between items-center">
-        <div>
-          <h1 class="font-bold mb-6 text-center text-white text-xl ml-5">
-            Dashboard
-          </h1>
-        </div>
-
-        <div class="text-center mr-5">
-          <button
-            id="logout_button"
-            class="bg-red-500 hover:bg-red-600 translate-x-3t text-white py-2 px-6 rounded-lg"
-          >
-            Logout
-          </button>
-        </div>
+  <body class="bg-blue-950 h-screen overflow-hidden text-white">
+    <div>
+      <nav
+        class="flex justify-between items-center px-6 py-4 bg-blue-900 shadow-md"
+      >
+        <h1 class="font-bold text-xl">Dashboard</h1>
+        <button
+          id="logout_button"
+          class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg transition"
+        >
+          Logout
+        </button>
       </nav>
     </div>
-    
-    <div class="flex flex-row gap-4 ">
+
+    <div class="flex flex-row gap-6 p-6">
+      <!-- Left Section -->
       <div>
-        <div class="w-[500px] bg-gray-700 h-[21rem] rounded-2xl ml-5">
-          <h2 class="text-xl text-white mx-8 mt-4 font-bold">My Card</h2>
+        <!-- My Card -->
+        <div class="w-[500px] bg-gray-700 rounded-2xl p-6 shadow-lg">
+          <h2 class="text-xl font-bold mb-4">My Card</h2>
           <div
             id="user-info"
-            class="text-black text-lg bg-slate-100 h-64 rounded-lg items-center justify-center w-[400px] mx-10 mt-7"
+            class="bg-slate-100 text-black p-4 rounded-lg h-64"
           ></div>
         </div>
-    
+
+        <!-- Action Buttons -->
         <div
-          class="flex justify-around items-center mt-6 w-[500px] h-[12rem] bg-gray-700 ml-5 rounded-xl"
+          class="flex justify-around items-center mt-6 w-[500px] h-[12rem] bg-gray-700 rounded-xl p-4 shadow-md"
         >
-          <div>
+          <!-- Deposit -->
+          <div class="flex flex-col items-center openModalBtn cursor-pointer">
             <button
-              class="px-4 py-2 bg-gray-400 text-white rounded items-center openModalButton"
-    
+              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full"
             >
-              <i class="bx bx-up-arrow-alt"></i>
+              <i class="bx bx-up-arrow-alt text-2xl text-white"></i>
             </button>
-            <p class="text-white">Deposit</p>
+            <p class="mt-2">Deposit</p>
           </div>
-          <div>
+
+          <!-- Withdraw -->
+          <div class="flex flex-col items-center openModalBtn cursor-pointer">
             <button
-              class="px-4 py-2 bg-gray-400 text-white rounded openModalButton"
+              class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-full"
             >
-              <i class="bx bx-down-arrow-alt"></i>
+              <i class="bx bx-down-arrow-alt text-2xl text-white"></i>
             </button>
-            <p class="text-white">Withdraw</p>
+            <p class="mt-2">Withdraw</p>
           </div>
-          <div>
+
+          <!-- Savings -->
+          <div class="flex flex-col items-center openModalSavingsBtn cursor-pointer">
             <button
-              class="px-4 py-2 bg-gray-400 text-white rounded openModalButton"
-      
+              class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full"
             >
-              <i class="bx bx-wallet"></i>
+              <i class="bx bx-wallet text-2xl text-white"></i>
             </button>
-            <p class="text-white">Savings</p>
+            <p class="mt-2">Savings</p>
           </div>
         </div>
       </div>
 
-      <div
-        class="bg-slate-200 w-[700px] h-30 shadow-sm rounded-md"
-        id="transaction-history"
-      >
-        <h4 class="text-xl ml-5">Transaction History</h4>
-        <div class="overflow-x-auto mt-4">
+      <!-- Transaction History -->
+      <div class="bg-slate-200 w-[700px] rounded-lg shadow-md p-6 text-black">
+        <h4 class="text-xl font-semibold mb-4">Transaction History</h4>
+        <div class="overflow-x-auto">
           <table
             class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md"
           >
@@ -91,17 +94,110 @@
                 <th class="px-4 py-2 text-left">Amount</th>
               </tr>
             </thead>
-            <tbody id="transactionTableBody" class="text-center"></tbody>
+            <tbody
+              id="transactionTableBody"
+              class="text-center"
+            ></tbody>
           </table>
         </div>
-  
       </div>
-
     </div>
 
-    
 
-      <!-- Modal -->
+    <!-- Modal for Deposit -->
+      <div
+        id="modal"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+      >
+        <div
+          class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Deposit Fund</h2>
+            <button
+              id="closeModalButton"
+              class="text-gray-500 hover:text-red-600 text-2xl"
+            >
+              &times;
+            </button>
+          </div>
+          <form onsubmit="handleSubmit(event)" class="space-y-4">
+            <!-- Bank Name -->
+            <div>
+              <label
+                for="bankName"
+                class="block text-md font-medium text-gray-700 mb-1"
+                >Bank Name</label
+              >
+              <input
+                id="bankName"
+                type="text"
+                placeholder="Bank Name"
+                required
+                class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
+              />
+            </div>
+
+            <!-- Account Number -->
+            <div>
+              <label
+                for="accountNumber"
+                class="block text-md font-medium text-gray-700 mb-1"
+                >Account Number</label
+              >
+              <input
+                id="accountNumber"
+                type="text"
+                placeholder="Account Number"
+                required
+                class="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+
+            <!-- Account Name  -->
+            <div>
+              <label
+                for="accountName"
+                class="block text-md font-medium text-gray-700 mb-1"
+                >Account Name</label
+              >
+              <input
+                id="accountName"
+                type="text"
+                placeholder="Account Name"
+                required
+                class="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+
+            <!-- Amount -->
+            <div>
+              <label
+                for="amount"
+                class="block text-md font-medium text-gray-700 mb-1"
+                >Amount</label
+              >
+              <input
+                id="amount"
+                type="text"
+                placeholder="Amount"
+                required
+                class="w-full border border-gray-300 rounded px-3 py-2"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- Modal for Withdraw-->
       <div
         id="modal"
         class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
@@ -182,12 +278,27 @@
                 class="w-full border border-gray-300 rounded px-3 py-2"
               />
             </div>
+            <button
+              type="submit"
+              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
 
-            <!--send modal-->
-            <div id="modal"
-               class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-            <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">SendFunds</h2>
+      <!-- Modal for Saves -->
+
+        <div
+        id="modal-savings"
+        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+      >
+        <div
+          class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Savings</h2>
             <button
               id="closeModalButton"
               class="text-gray-500 hover:text-red-600 text-2xl"
@@ -196,14 +307,22 @@
             </button>
           </div>
           <form onsubmit="handleSubmit(event)" class="space-y-4">
-            
-          
-
-
-
-
+            <!-- Amount -->
+            <div>
+              <label
+                for="amount"
+                class="block text-md font-medium text-gray-700 mb-1"
+                >Amount</label
+              >
+              <input
+                id="amount"
+                type="number"
+                placeholder="Amount"
+                required
+                class="w-full border border-gray-300 rounded px-3 py-2"
+              />
             </div>
-            <!--  -->
+
             <button
               type="submit"
               class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
@@ -215,6 +334,8 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+
+
+    <script src="./script.js"></script>
   </body>
 </html>
