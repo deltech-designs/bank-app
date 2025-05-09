@@ -16,21 +16,18 @@
     />
     <title>Dashboard</title>
   </head>
-
   <body class="bg-blue-950 h-screen overflow-hidden text-white">
-    <div>
-      <nav
-        class="flex justify-between items-center px-6 py-4 bg-blue-900 shadow-md"
+    <nav
+      class="flex justify-between items-center px-6 py-4 bg-blue-900 shadow-md"
+    >
+      <h1 class="font-bold text-xl">Dashboard</h1>
+      <button
+        id="logout_button"
+        class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg transition"
       >
-        <h1 class="font-bold text-xl">Dashboard</h1>
-        <button
-          id="logout_button"
-          class="bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg transition"
-        >
-          Logout
-        </button>
-      </nav>
-    </div>
+        Logout
+      </button>
+    </nav>
 
     <div class="flex flex-row gap-6 p-6">
       <!-- Left Section -->
@@ -49,9 +46,10 @@
           class="flex justify-around items-center mt-6 w-[500px] h-[12rem] bg-gray-700 rounded-xl p-4 shadow-md"
         >
           <!-- Deposit -->
-          <div class="flex flex-col items-center openModalBtn cursor-pointer">
+          <div class="flex flex-col items-center cursor-pointer">
             <button
               class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-full"
+              onclick="openModal('depositModal')"
             >
               <i class="bx bx-up-arrow-alt text-2xl text-white"></i>
             </button>
@@ -59,9 +57,10 @@
           </div>
 
           <!-- Withdraw -->
-          <div class="flex flex-col items-center openModalBtn cursor-pointer">
+          <div class="flex flex-col items-center cursor-pointer">
             <button
               class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-full"
+              onclick="openModal('withdrawModal')"
             >
               <i class="bx bx-down-arrow-alt text-2xl text-white"></i>
             </button>
@@ -69,9 +68,10 @@
           </div>
 
           <!-- Savings -->
-          <div class="flex flex-col items-center openModalSavingsBtn cursor-pointer">
+          <div class="flex flex-col items-center cursor-pointer">
             <button
               class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full"
+              onclick="openModal('savingsModal')"
             >
               <i class="bx bx-wallet text-2xl text-white"></i>
             </button>
@@ -103,239 +103,150 @@
       </div>
     </div>
 
-
-    <!-- Modal for Deposit -->
+    <!-- Deposit Modal -->
+    <div
+      id="depositModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
       <div
-        id="modal"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+        class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
       >
-        <div
-          class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
-        >
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">Deposit Fund</h2>
-            <button
-              id="closeModalButton"
-              class="text-gray-500 hover:text-red-600 text-2xl"
-            >
-              &times;
-            </button>
-          </div>
-          <form onsubmit="handleSubmit(event)" class="space-y-4">
-            <!-- Bank Name -->
-            <div>
-              <label
-                for="bankName"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Bank Name</label
-              >
-              <input
-                id="bankName"
-                type="text"
-                placeholder="Bank Name"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              />
-            </div>
-
-            <!-- Account Number -->
-            <div>
-              <label
-                for="accountNumber"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Account Number</label
-              >
-              <input
-                id="accountNumber"
-                type="text"
-                placeholder="Account Number"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-
-            <!-- Account Name  -->
-            <div>
-              <label
-                for="accountName"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Account Name</label
-              >
-              <input
-                id="accountName"
-                type="text"
-                placeholder="Account Name"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-
-            <!-- Amount -->
-            <div>
-              <label
-                for="amount"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Amount</label
-              >
-              <input
-                id="amount"
-                type="text"
-                placeholder="Amount"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-            
-            <button
-              type="submit"
-              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              Send
-            </button>
-          </form>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Deposit Funds</h2>
+          <button
+            onclick="closeModal('depositModal')"
+            class="text-gray-500 hover:text-red-600 text-2xl"
+          >
+            &times;
+          </button>
         </div>
-      </div>
-
-
-      <!-- Modal for Withdraw-->
-      <div
-        id="modal"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
-      >
-        <div
-          class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
+        <form
+          onsubmit="handleSubmit(event)"
+          class="space-y-4"
         >
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">Transfer Funds</h2>
-            <button
-              id="closeModalButton"
-              class="text-gray-500 hover:text-red-600 text-2xl"
-            >
-              &times;
-            </button>
-          </div>
-          <form onsubmit="handleSubmit(event)" class="space-y-4">
-            <!-- Bank Name -->
-            <div>
-              <label
-                for="bankName"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Bank Name</label
-              >
-              <input
-                id="bankName"
-                type="text"
-                placeholder="Bank Name"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-              />
-            </div>
-
-            <!-- Account Number -->
-            <div>
-              <label
-                for="accountNumber"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Account Number</label
-              >
-              <input
-                id="accountNumber"
-                type="text"
-                placeholder="Account Number"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-
-            <!-- Account Name  -->
-            <div>
-              <label
-                for="accountName"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Account Name</label
-              >
-              <input
-                id="accountName"
-                type="text"
-                placeholder="Account Name"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-
-            <!-- Amount -->
-            <div>
-              <label
-                for="amount"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Amount</label
-              >
-              <input
-                id="amount"
-                type="number"
-                placeholder="Amount"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-            <button
-              type="submit"
-              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              Send
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Modal for Saves -->
-
-        <div
-        id="modal-savings"
-        class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
-      >
-        <div
-          class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
-        >
-          <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold">Savings</h2>
-            <button
-              id="closeModalButton"
-              class="text-gray-500 hover:text-red-600 text-2xl"
-            >
-              &times;
-            </button>
-          </div>
-          <form onsubmit="handleSubmit(event)" class="space-y-4">
-            <!-- Amount -->
-            <div>
-              <label
-                for="amount"
-                class="block text-md font-medium text-gray-700 mb-1"
-                >Amount</label
-              >
-              <input
-                id="amount"
-                type="number"
-                placeholder="Amount"
-                required
-                class="w-full border border-gray-300 rounded px-3 py-2"
-              />
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-            >
-              Send
-            </button>
-          </form>
-        </div>
+          <input
+            type="text"
+            placeholder="Bank Name"
+            required
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="text"
+            placeholder="Account Number"
+            required
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="text"
+            placeholder="Account Name"
+            required
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="number"
+            placeholder="Amount"
+            required
+            class="w-full border rounded px-3 py-2"
+          />
+          <button
+            type="submit"
+            class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          >
+            Send
+          </button>
+        </form>
       </div>
     </div>
 
+    <!-- Withdraw Modal -->
+    <div
+      id="withdrawModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div
+        class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Withdraw Funds</h2>
+          <button
+            onclick="closeModal('withdrawModal')"
+            class="text-gray-500 hover:text-red-600 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <form
+          onsubmit="handleSubmit(event)"
+          class="space-y-4"
+        >
+          <input
+            type="text"
+            placeholder="Bank Name"
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="text"
+            placeholder="Account Number"
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="text"
+            placeholder="Account Name"
+            class="w-full border rounded px-3 py-2"
+          />
+          <input
+            type="text"
+            placeholder="Amount"
+            class="w-full border rounded px-3 py-2"
+          />
+          <button
+            type="submit"
+            class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+          >
+            Widthdraw
+          </button>
+        </form>
+      </div>
+    </div>
 
+    <!-- Savings Modal -->
+    <div
+      id="savingsModal"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div
+        class="bg-white w-full max-w-md p-6 rounded-lg shadow-xl flex flex-col"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-semibold">Savings</h2>
+          <button
+            onclick="closeModal('savingsModal')"
+            class="text-gray-500 hover:text-red-600 text-2xl"
+          >
+            &times;
+          </button>
+        </div>
+        <form
+          onsubmit="handleSubmit(event)"
+          class="space-y-4"
+        >
+          <input
+            type="number"
+            placeholder="Amount"
+            required
+            class="w-full border rounded px-3 py-2"
+          />
+          <button
+            type="submit"
+            class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
 
+    <!-- JS Script -->
     <script src="./script.js"></script>
   </body>
 </html>

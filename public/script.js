@@ -129,34 +129,141 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const openModalBtn = document.querySelectorAll('.openModalBtn');
-  const modal = document.querySelector('#modal');
-  const closeModalButton = document.querySelectorAll('#closeModalButton');
-  console.log(openModalBtn, modal, closeModalButton);
+  window.justAlert = function (id) {
+    alert(`This feature is not available yet!, ${id}`);
+  };
 
-  if (openModalBtn) {
-    openModalBtn.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Modal opened!');
-        modal.classList.remove('hidden');
-      });
+  // Open the modal
+  window.openModal = function (modalId) {
+    alert('Modal opened!');
+    document.getElementById(modalId).classList.remove('hidden');
+  };
+
+  // Close the modal
+  window.closeModal = function (modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+  };
+
+  // Handle Deposit Form
+  function handleDepositForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const bankName = form.querySelector('input[placeholder="Bank Name"]').value;
+    const accountNumber = form.querySelector(
+      'input[placeholder="Account Number"]'
+    ).value;
+    const accountName = form.querySelector(
+      'input[placeholder="Account Name"]'
+    ).value;
+    const amount = form.querySelector('input[placeholder="Amount"]').value;
+
+    if (!bankName || !accountNumber || !accountName || !amount) {
+      alert('Please fill all fields.');
+      return;
+    }
+
+    console.log('Depositing:', {
+      bankName,
+      accountNumber,
+      accountName,
+      amount,
     });
+
+    alert('Deposit successful!');
+
+    form.reset();
+    closeModal('depositModal');
   }
 
-  if (closeModalButton) {
-    closeModalButton.forEach((closeBtn) => {
-      closeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        alert('Modal closed!');
-        modal.classList.add('hidden');
-      });
+  // Handle Withdraw Form
+  function handleWithdrawForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const bankName = form.querySelector('input[placeholder="Bank Name"]').value;
+    const accountNumber = form.querySelector(
+      'input[placeholder="Account Number"]'
+    ).value;
+    const accountName = form.querySelector(
+      'input[placeholder="Account Name"]'
+    ).value;
+    const amount = form.querySelector('input[placeholder="Amount"]').value;
+
+    if (!bankName || !accountNumber || !accountName || !amount) {
+      alert('Please fill all fields.');
+      return;
+    }
+
+    console.log('Withdrawing:', {
+      bankName,
+      accountNumber,
+      accountName,
+      amount,
     });
+
+    alert('Withdrawal successful!');
+
+    form.reset();
+    closeModal('withdrawModal');
   }
 
-  // Deposit and Withdraw
-  const depositButton = document.querySelector('#deposit_button');
-  const withdrawButton = document.querySelector('#withdraw_button');
+  // Handle Savings Form
+  function handleSavingsForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const amount = form.querySelector('input[placeholder="Amount"]').value;
+
+    if (!amount) {
+      alert('Please enter an amount.');
+      return;
+    }
+
+    console.log('Saving amount:', amount);
+
+    alert('Amount saved successfully!');
+
+    form.reset();
+    closeModal('savingsModal');
+  }
+
+  // Attach form listeners after DOM loads
+  window.addEventListener('DOMContentLoaded', () => {
+    const depositForm = document.querySelector('#depositModal form');
+    const withdrawForm = document.querySelector('#withdrawModal form');
+    const savingsForm = document.querySelector('#savingsModal form');
+
+    depositForm.addEventListener('submit', handleDepositForm);
+    withdrawForm.addEventListener('submit', handleWithdrawForm);
+    savingsForm.addEventListener('submit', handleSavingsForm);
+  });
+
+  // const openModalBtn = document.querySelectorAll('.openModalBtn');
+  // const modal = document.querySelector('#modal');
+  // const closeModalButton = document.querySelectorAll('#closeModalButton');
+  // console.log(openModalBtn, modal, closeModalButton);
+
+  // if (openModalBtn) {
+  //   openModalBtn.forEach((btn) => {
+  //     btn.addEventListener('click', (e) => {
+  //       e.preventDefault();
+  //       alert('Modal opened!');
+  //       modal.classList.remove('hidden');
+  //     });
+  //   });
+  // }
+
+  // if (closeModalButton) {
+  //   closeModalButton.forEach((closeBtn) => {
+  //     closeBtn.addEventListener('click', (e) => {
+  //       e.preventDefault();
+  //       alert('Modal closed!');
+  //       modal.classList.add('hidden');
+  //     });
+  //   });
+  // }
+
+  // // Deposit and Withdraw
+  // const depositButton = document.querySelector('#deposit_button');
+  // const withdrawButton = document.querySelector('#withdraw_button');
 
   // depositButton.addEventListener('click', (e) => {
   //   e.preventDefault();
@@ -182,18 +289,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // });
 
   // Transaction History
-  const transactionHistory = document.querySelector('#transaction-history');
-  if (transactionHistory) {
-    const transactions = loggedInUser.transactions
-      .map((transaction) => {
-        return `<li>${transaction.date} - $${transaction.amount} - ${transaction.type}</li>`;
-      })
-      .join('');
-    transactionHistory.innerHTML =
-      transactions || '<li>No transactions found.</li>';
-  }
+  // const transactionHistory = document.querySelector('#transaction-history');
+  // if (transactionHistory) {
+  //   const transactions = loggedInUser.transactions
+  //     .map((transaction) => {
+  //       return `<li>${transaction.date} - $${transaction.amount} - ${transaction.type}</li>`;
+  //     })
+  //     .join('');
+  //   transactionHistory.innerHTML =
+  //     transactions || '<li>No transactions found.</li>';
+  // }
 
   // Savings
-  const savingsButton = document.querySelector('#savings_button');
-  const savingsAmount = document.querySelector('#savings_amount');
+  // const savingsButton = document.querySelector('#savings_button');
+  // const savingsAmount = document.querySelector('#savings_amount');
 });
